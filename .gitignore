@@ -1,0 +1,10 @@
+# egg-info
+
+*.egg-info/
+
+# dist
+*dist/
+
+# cache 
+__pycache__/
+.cache/

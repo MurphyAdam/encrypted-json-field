@@ -1,11 +1,14 @@
 name: Publish Python Package
 
 on:
+  push:
+    branches:
+      - main
   release:
     types: [created]
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,6 +27,7 @@ jobs:
           python -m build
 
       - name: Publish to Test PyPI
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TEST_API_TOKEN }}
